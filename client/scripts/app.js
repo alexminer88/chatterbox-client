@@ -6,12 +6,7 @@ var App = {
 
   initialize: function() {
     App.username = window.location.search.substr(10);
-    
-    // create list of friends
-    // let friends = new Friends();
-    
-    
-    // I think we want to put our event handlers inside of each of these files.
+
     FormView.initialize();
     RoomsView.initialize();
     MessagesView.initialize();
@@ -26,34 +21,22 @@ var App = {
     Parse.readAll((data) => {
       // examine the response from the server request:
       console.log(data);
-      // do something with the data
+      // do call appropriate methods with the data
       data.results.forEach(element => {
-        // check data for script tags, meaning string starts with <script>
-        
-        
-        if (element.username !== undefined && element.text !== undefined) {
-          if (element.text.slice(0, 7) !== '<script>' && element.username.slice(0, 7) !== '<script>') {
-            // push element's data to Messages
-            let x = 0;
-            let messageTest = {};
-            messageTest.username = element.username;
-            messageTest.text = element.text;
-            messageTest.roomname = element.roomname;
-            // let message = {
-            //   username: element.username,
-            //   text: element.text,
-            //   roomname: element.roomname
-            // };
-            // debugger;
-            Messages.add(messageTest);
-            
-            
-          } 
+        let message = {};
+        message.text = element.text === undefined ? undefined: element.text.split('<').join('&lt;').split('>').join('&gt;');
+        message.username = element.username === undefined ? undefined: element.username.split('<').join('&lt;').split('>').join('&gt;');
+        message.roomname = element.roomname === undefined || element.roomname === null ? undefined : element.roomname.split('<').join('&lt;').split('>').join('&gt;');
+        Messages.add(message);
+        // if roomname does not exists, add room
+        if (message.roomname !== undefined && !Rooms.allRooms.includes(message.roomname)) {
+          Rooms.add(message.roomname);
         }
+        
+
       });
-      // clean up data?
-      // call functions to display data
-      
+      // render rooms
+      RoomsView.render();
       MessagesView.render();
       callback();
     });
@@ -71,7 +54,6 @@ var App = {
   
 };
 
-// should send message on click of submit
 
 
 

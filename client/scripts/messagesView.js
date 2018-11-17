@@ -3,19 +3,24 @@ var MessagesView = {
   $chats: $('#chats'),
 
   initialize: function() {
-    // Username on click 
-    // on "#username" do something --- invoke Friends.toggleStatus
-    // $('#chats').find('.username').trigger('click');
+    // event handler for username clicks
     $('.username').on("click", function(name) {
-    // calls toggleStatus on friends object
+      // what is name?
+      // this.childNode
+      // we can only refer to 
+      // this.
+      console.log(event.target)
+      console.log('this')
       Friends.toggleStatus(name);
     });
     
     //event handler for rooms clicks
     $('#rooms').on("click", function() {
+      
       Rooms.add();
     });
     
+    //event handler for form submit
     $('form .submit').on("submit", function() {
       // send message
       console.log('test');
@@ -35,19 +40,41 @@ var MessagesView = {
       // invoke messagesViews?
     });
     
-    
+    $("#rooms select").on("change", function() {
+      $('#chats').empty();      
+      Messages.allMessages.forEach(message => {        
+        let selected = $("#rooms select option:selected").text();
+        if (selected === message.roomname) {
+          MessagesView.renderMessage(message);
+        } else if (selected === "All Rooms") {
+          MessagesView.renderMessage(message);
+        }        
+      })
+    });
+       
   },
 
   render: function() {
+    
+    // only display messages from currently selected room, if none are selected, display all
     Messages.allMessages.forEach(message => {
-      MessagesView.renderMessage(message);
+        MessagesView.renderMessage(message);
+      //$("#rooms select option:selected").text() --> currently selected room
+      
+      // let selected = $("#rooms select option:selected").text()
+      // //print if selected === message.roomname
+      // if (selected === message.roomname) {
+      // }
     });
   },
   
   renderMessage: function(message) {
+    // call messageView passing message
+    // clean script inputs
     var html = _.template(
       '<div class="chat">' +
-        '<div class="<%= username %>">' +
+        '<div class="username">' +
+          '<%= username %>:' +
           '<p class="message">' +
             '<%= text %>' +
           '</p>' + 

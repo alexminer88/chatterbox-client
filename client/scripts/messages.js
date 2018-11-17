@@ -1,5 +1,4 @@
 var Messages = {
-  // holds all the message objects
   allMessages: [],
   
   add: function(message) {
@@ -7,3 +6,12 @@ var Messages = {
   }
 
 };
+
+
+// $('')
+// var arr = $('.username');
+
+// var arr = arr.map(function(el) {
+//   console.log(el.className);
+//   return el.childNodes;
+// });

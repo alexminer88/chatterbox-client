@@ -24,12 +24,20 @@
   <body>
     <div id="main">
       <h1>chatterbox</h1>
+      <h2>
+        <div>
+          
+        </div>
+      </h2>
       <div class="spinner"><img src="client/images/spiffygif_46x46.gif"></div>
       <div id="rooms">
         Room:
-        <select id="roomSelect">
-          <!-- <option value="addRoom">--Add New Room--</option> -->
+        <select>
+          <option value="addRoom">All Rooms</option>
         </select>
+        <form action="#" id="roomAdder" method="post">
+          <input type="text" name="">
+        </form>
         <button>Add Room</button>
       </div>
       <form action="#" id="send" method="post">

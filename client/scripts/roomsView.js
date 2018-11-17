@@ -5,37 +5,23 @@ var RoomsView = {
 
   initialize: function() {
     $('button').on("click", function() {
-      // debugger;
-      Rooms.add();
+      // turned off in order to debug adding rooms on fetch
+      // Rooms.add();
     });
   },
 
   render: function() {
+    Rooms.allRooms.forEach(room => {
+      RoomsView.renderRoom(room);
+    });
   },
   
   renderRoom: function(roomName) {
-    // takes in a string, creates "room"
-    // appending "room" to $('#rooms select')
     var html = _.template(
-      "<div class='messages'>" +
-        "<p class='message'>" +
-          "<%= roomName %>" +
-        "</p>" + 
-      "</div>"
+      "<option class='room'>" +
+        "<%= roomName %>" + 
+      "</option>"
     );
     $('#rooms select').append(html({ roomName: roomName }));
   }
 };
-
-
-
-// RoomsView.$button.click("on", function() {     
-// // if select button option has a value of addRoom, add new room
-// // should pop up a form? or a dialog box?
-// // grab whatever that value is and invoke 
-//   // add new room text to select menu
-//   // add room to rooms.js (this is controller talking to model)
-//   Rooms.add();
-// //if select button option is not addRoom, should somehow talk to the model to run 
-// // a method to get the visuals to change
-// });
