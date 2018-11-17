@@ -9,7 +9,14 @@ var FormView = {
   handleSubmit: function(event) {
     // Stop the browser from submitting the form
     // event.preventDefault();
-    
+    var message = {
+      username: window.location.search.slice(10),
+      text: $('input:first').val(),
+      roomname: 'hrsf108'
+    };
+    Parse.create(message, function() {
+      console.log('oops');
+    });
     console.log('click!' + event);
   },
 

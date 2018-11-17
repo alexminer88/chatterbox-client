@@ -32,7 +32,7 @@ var App = {
         
         
         if (element.username !== undefined && element.text !== undefined) {
-          if (!element.text.slice(0, 7) === '<script>' && !element.username.slice(0, 7) === '<script>') {
+          if (element.text.slice(0, 7) !== '<script>' && element.username.slice(0, 7) !== '<script>') {
             // push element's data to Messages
             let x = 0;
             let messageTest = {};
@@ -44,14 +44,17 @@ var App = {
             //   text: element.text,
             //   roomname: element.roomname
             // };
-            debugger;
+            // debugger;
             Messages.add(messageTest);
+            
             
           } 
         }
       });
       // clean up data?
       // call functions to display data
+      
+      MessagesView.render();
       callback();
     });
   },

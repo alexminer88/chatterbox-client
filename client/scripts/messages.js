@@ -3,7 +3,7 @@ var Messages = {
   allMessages: [],
   
   add: function(message) {
-    allMessages.push(message);
+    Messages.allMessages.push(message);
   }
 
 };

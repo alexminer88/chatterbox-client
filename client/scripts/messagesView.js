@@ -27,6 +27,7 @@ var MessagesView = {
       //   roomName
       // };
       Parse.create();
+      // MessagesView.render();
       // Messages.add();
       
       // takes form input
@@ -38,13 +39,15 @@ var MessagesView = {
   },
 
   render: function() {
-    
+    Messages.allMessages.forEach(message => {
+      MessagesView.renderMessage(message);
+    });
   },
   
   renderMessage: function(message) {
     var html = _.template(
       '<div class="chat">' +
-        '<div class="username">' +
+        '<div class="<%= username %>">' +
           '<p class="message">' +
             '<%= text %>' +
           '</p>' + 
