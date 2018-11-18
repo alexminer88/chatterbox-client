@@ -4,15 +4,8 @@ var MessagesView = {
 
   initialize: function() {
     // event handler for username clicks
-    $('.username').on("click", function(name) {
-      // what is name?
-      // this.childNode
-      // we can only refer to 
-      // this.
-      console.log(event.target)
-      console.log('this')
-      Friends.toggleStatus(name);
-    });
+    $('#chats').on("click",'.username', MessagesView.handleClick);
+    
     
     //event handler for rooms clicks
     $('#rooms').on("click", function() {
@@ -69,18 +62,18 @@ var MessagesView = {
   },
   
   renderMessage: function(message) {
-    // call messageView passing message
-    // clean script inputs
-    var html = _.template(
-      '<div class="chat">' +
-        '<div class="username">' +
-          '<%= username %>:' +
-          '<p class="message">' +
-            '<%= text %>' +
-          '</p>' + 
-        '</div>' +
-      '</div>'
-    );
-    $('#chats').append(html(message));
+    var $message = MessageView.render(message);    
+    $('#chats').append($message );
+  },
+  
+  handleClick: function(event) {
+
+    var username = event.target.getAttribute('data-username');
+    if (username === undefined) {
+      return;
+    }
+    username = JSON.stringify(username);
+    Friends.toggleStatus(username);
+    // Friends.highlight();
   }
 };

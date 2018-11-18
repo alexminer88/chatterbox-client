@@ -23,10 +23,12 @@ var App = {
       console.log(data);
       // do call appropriate methods with the data
       data.results.forEach(element => {
-        let message = {};
-        message.text = element.text === undefined ? undefined: element.text.split('<').join('&lt;').split('>').join('&gt;');
-        message.username = element.username === undefined ? undefined: element.username.split('<').join('&lt;').split('>').join('&gt;');
-        message.roomname = element.roomname === undefined || element.roomname === null ? undefined : element.roomname.split('<').join('&lt;').split('>').join('&gt;');
+        let message = {
+          text: element.text,
+          username: element.username,
+          roomname: element.roomname
+        };
+
         Messages.add(message);
         // if roomname does not exists, add room
         if (message.roomname !== undefined && !Rooms.allRooms.includes(message.roomname)) {

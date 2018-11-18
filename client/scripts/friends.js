@@ -1,15 +1,22 @@
 var Friends = {
-  listOfFriends: {},
+  listOfFriends: new Set,
   
-  toggleStatus: function(friend) {
+  isFriend: function(name) {
+    return Friends.listOfFriends.has(name);
+  },
+  
+  toggleStatus: function(friend, callback = () => {}) {
     // if friend is not found in listOfFriends, create it and then set 
     // value to true.
     // if friend is found in listOfFriends, flip truthiness of value
-    // if (listOfFriends[friend] === undefined) {
-    //   listOfFriends[friend] = true;
-    // } else {
-    //   listOfFriends[friend] = !listOfFriends[friend];
-    // }
-    return true;
+    if (Friends.listOfFriends.has(friend)) {
+      Friends.listOfFriends.delete(friend);
+      callback(false);
+    } else {
+      Friends.listOfFriends.add(friend);
+      callback(true);
+    }
+    
+    // return true;
   }
 };
