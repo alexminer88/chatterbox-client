@@ -15,22 +15,18 @@ var MessagesView = {
     
     //event handler for form submit
     $('form .submit').on("submit", function() {
-      // send message
       console.log('test');
-      // let text = $('#message');
-      // let roomName = $('#roomSelect').find(":selected").text();
-      // let message = {
-      //   username,
-      //   text,
-      //   roomName
-      // };
+      let text = $('#message');
+      let roomName = $('#roomSelect').find(":selected").text();
+      let message = {
+        username,
+        text,
+        roomName
+      };
       Parse.create();
-      // MessagesView.render();
-      // Messages.add();
-      
-      // takes form input
-      // sends to messages
-      // invoke messagesViews?
+      MessagesView.render();
+      Messages.add();
+
     });
     
     $("#rooms select").on("change", function() {
@@ -72,8 +68,13 @@ var MessagesView = {
     if (username === undefined) {
       return;
     }
-    username = JSON.stringify(username);
+    $eventTarget = $(event.target); 
+    if ($eventTarget.hasClass('friend')) {
+      $(event.target).removeClass('friend');
+    } else {
+      $(event.target).addClass('friend');
+    }
     Friends.toggleStatus(username);
-    // Friends.highlight();
+    
   }
 };

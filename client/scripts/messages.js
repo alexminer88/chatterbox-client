@@ -6,12 +6,3 @@ var Messages = {
   }
 
 };
-
-
-// $('')
-// var arr = $('.username');
-
-// var arr = arr.map(function(el) {
-//   console.log(el.className);
-//   return el.childNodes;
-// });

@@ -15,6 +15,8 @@ var App = {
     App.startSpinner();
     App.fetch(App.stopSpinner);
 
+
+    // setInterval(App.fetch, 5000);
   },
 
   fetch: function(callback = ()=>{}) {
@@ -30,7 +32,6 @@ var App = {
         };
 
         Messages.add(message);
-        // if roomname does not exists, add room
         if (message.roomname !== undefined && !Rooms.allRooms.includes(message.roomname)) {
           Rooms.add(message.roomname);
         }

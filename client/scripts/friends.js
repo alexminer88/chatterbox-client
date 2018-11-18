@@ -18,5 +18,6 @@ var Friends = {
     }
     
     // return true;
-  }
+  },
+  
 };

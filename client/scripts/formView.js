@@ -11,8 +11,12 @@ var FormView = {
     // event.preventDefault();
     var message = {
       username: window.location.search.slice(10),
-      text: $('input:first').val(),
-      roomname: 'hrsf108'
+      // username: App.username
+      // text: FormView.$form.find('#message').val(),
+      text: $('#message').val(),
+      // roomname: Rooms.selected || 'lobby'
+      roomname: $('#roomSelect').find(":selected").text()
+
     };
     Parse.create(message, function() {
       console.log('oops');
